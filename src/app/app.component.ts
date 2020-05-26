@@ -9,7 +9,7 @@ import { DynamicFormComponent } from "./components/dynamic-form/dynamic-form.com
 export interface Tile {
   cols: number;
   rows: number;
-  // recieve: string;
+  recieve: string;
 }
 export interface Property{
   colspan:number;
@@ -33,6 +33,7 @@ export interface Selection{
 })
 export class AppComponent implements OnInit {
   property:any[]=[];
+  propertyToDisplay:any[]=[];
   allInputs:any;
   recieve:any = "";
   question:any;
@@ -51,6 +52,7 @@ export class AppComponent implements OnInit {
     }
   ];
   newAttribute: any = {};
+  propertyOpenForEdit: number;
 
   firstField = true;
   firstFieldName = 'First Item name';
@@ -70,7 +72,7 @@ export class AppComponent implements OnInit {
     for(let i=0;i<this.allInputs.length;i++){
       if(this.allInputs[i].type==$event.dragData){
         this.recieve = this.allInputs[i].code;
-        this.codes.push({cols:1,rows:1});
+        this.codes.push({cols:1,rows:1,recieve:this.recieve});
       }
       
     }
@@ -87,9 +89,23 @@ export class AppComponent implements OnInit {
       option:[],
       value:""
     })
+    this.propertyToDisplay.push([{
+      id:v4(),
+      type:$event.dragData,
+      inputtype:"",
+      colspan:0,
+      required:false,
+      label:$event.dragData,
+      hint:"",
+      placeholder:"",
+      name:"",
+      option:[],
+      value:""
+    }])
     console.log(this.recieve);
     console.log(this.codes);
     console.log(this.property);
+    console.log(this.propertyToDisplay);
 }
 toggleevent(event){
 console.log(event);
@@ -112,12 +128,14 @@ colLength(value){
     this.length=this.length - 1;
   }
 }
-openModal(id: string) {
+openModal(id: string, index: number) {
   this.modalService.open(id);
+  this.propertyOpenForEdit = index;
 }
 
 closeModal(id: string) {
   this.modalService.close(id);
+  
 }
 
 addFieldValue(index) {
