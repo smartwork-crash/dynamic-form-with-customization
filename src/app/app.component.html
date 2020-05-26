@@ -1,0 +1,171 @@
+<mat-grid-list cols="5" rowHeight = "800px">
+        <mat-grid-tile [colspan]="1">
+            <mat-accordion >
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Inputs
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <ol type="1">
+                        <li *ngFor = "let input of allInputs" dnd-draggable [dragEnabled]="true" [dragData]="input.type" [dropZones]="['zone']" style="font-size:15px;margin: 5px 0px;">
+                        {{input.type}}
+                      </li>
+                      </ol>
+                </mat-expansion-panel>
+                </mat-accordion>
+        </mat-grid-tile>
+        <mat-divider></mat-divider>
+        <mat-grid-tile #grid2 [colspan]="4">
+          <mat-list>
+                  <mat-list-item class="example-container"> 
+                      <mat-label>New Question:</mat-label>
+                  <mat-form-field>
+                      <textarea #ques matInput placeholder="Write New Question"></textarea>
+                  </mat-form-field>
+                  <button mat-raised-button (click)= "getQuestion(ques.value)" style = "color:blue">Submit</button>
+                  </mat-list-item>
+      <mat-divider [inset]="true" style="position:absolute;right:0px;width:100%;height:2px;margin:10px"></mat-divider>
+      <mat-list-item class="example-container"> 
+          <div style="position:absolute;left:20px;width:100%;height:2px;margin:10px">
+          Number of column in grid:{{length}}<span>
+            <button mat-stroked-button (click)= "colLength(1)" style = "color:blue" [disabled]="length == '6'" style="position:absolute;right:250px">Add column</button>
+            <button mat-stroked-button (click)= "colLength(2)" style = "color:blue" [disabled]="length == '1'"style="position:absolute;right:100px">Remove column</button></span>
+        </div>
+      </mat-list-item>
+      <mat-divider [inset]="true" style="position:absolute;right:0px;width:100%;height:2px;margin:10px"></mat-divider>
+                <section style="position:absolute;left:20px;width:100%;height:2px;margin:10px">
+                     Drag and drop Input:
+                  <mat-slide-toggle
+                      (toggleChange)="toggleevent($event);"
+                      [color]="color"
+                      [checked]="checked"
+                      [disabled]="disabled">
+                  </mat-slide-toggle ><span style = "color:blue">{{toggle}}</span>
+                </section>
+      <mat-list-item style="height:100%;width:100%;position:relative;top:50px;margin:0px;"
+      dnd-droppable (onDropSuccess)="transferDataSuccess($event)" [dropZones]="['zone']">
+              <mat-grid-list [cols]="length" gutterSize="30px" rowheight="100px" style="position:absolute;left:0px;top:0px;width:100%;height: 800px;z-index: 1000;overflow: auto;">
+                  <mat-grid-tile [colspan]="length"  >
+                    <div style="position:absolute;left:30px;top:0px">
+                          {{question}}
+                    </div>
+                  </mat-grid-tile>
+                  <mat-grid-tile *ngFor="let code of codes" [colspan]="code.cols"
+                  [rowspan]="code.rows"  [style.background]=blue  >
+                  <div >
+                        
+                      <a (click)="openModal('custom-modal-1')" matTooltip="Edit" >
+                        <mat-icon style="position:relative;top:3px;right: 5px">edit</mat-icon>
+                    </a>
+                    <a (click)="removeFormItem()" matTooltip="Remove" >
+                            <mat-icon style="position:relative;top:3px;right: 5px">clear</mat-icon>
+                        </a>
+                    <span>
+                        <dynamic-form [fields]="property" (submit)="submit($event)">
+                        </dynamic-form>
+                    <!-- <div style="align-content: center"  [innerHtml]="code.recieve | innerhtml"></div> -->
+                </span>
+                </div>
+                
+                  </mat-grid-tile>
+
+              </mat-grid-list>       
+      </mat-list-item>
+      </mat-list>
+        </mat-grid-tile>
+        </mat-grid-list>
+
+        <jw-modal id="custom-modal-1" >
+            <div class="modal">
+                    <div class="modal-body">
+        <mat-list>
+                <mat-list-item>
+                        <mat-label>Required:</mat-label>
+                        <mat-checkbox labelPosition="before" [(ngModel)]="checked"></mat-checkbox>
+                    </mat-list-item>
+                    <mat-list-item>
+                            <mat-label>Number of column:</mat-label>
+                            <mat-form-field>
+                                <input type="number" matInput placeholder="number of column">
+                            </mat-form-field>
+                        </mat-list-item>
+            
+                <mat-list-item>
+                    <mat-label>Label:</mat-label>
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Label">
+                    </mat-form-field>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-label>Hint:</mat-label>
+                    <mat-form-field>
+                            <input type="text" matInput placeholder="hint">
+                        </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                    <mat-label>Placeholder:</mat-label>
+                    <mat-form-field>
+                            <input type="text" matInput placeholder="Placeholder">
+                        </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                    <mat-label>Name:</mat-label>
+                    <mat-form-field>
+                            <input type="text" matInput placeholder="Name">
+                        </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                    <mat-label>Value:</mat-label>
+                    <mat-form-field>
+                        <input type="date" matInput placeholder="Value">
+                    </mat-form-field>
+                </mat-list-item>
+            <mat-list-item>
+                    <table class="table table-striped table-bordered col-lg-4">
+                            <thead>
+                                <tr>
+                                    <th>Options
+                                        <a (click)="onEditCloseItems()" class="text-info float-right">
+                                            <mat-icon>{{isEditItems ? 'close' : 'edit'}}</mat-icon>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                
+                            <tbody *ngIf="!isEditItems">
+                                <tr *ngFor="let field of fieldArray; let i = index">
+                                    <td *ngIf="field?.name">
+                                        <mat-card (click)="deleteFieldValue(i)">close</mat-card> {{field.name}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                
+                            <tbody *ngIf="isEditItems">
+                                <tr *ngFor="let field of fieldArray; let i = index">
+                                    <td>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div (click)="deleteFieldValue(i)" class="input-group-text">
+                                                    <mat-card (click)="deleteFieldValue(i)">close</mat-card>
+                                                </div>
+                                            </div>
+                                            <input [(ngModel)]="field.name" class="form-control" type="text" name="{{field.name}}" placeholder="Name...">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">
+                                        <button class="btn btn-secondary btn-lg1" type="button" (click)="addFieldValue()" style="margin-right:10px">Add More Option</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+            </mat-list-item>
+        
+        </mat-list>
+        <button mat-raised-button (click)="closeModal('custom-modal-1');">Close</button>
+        </div>
+        </div>
+        <div class="modal-background"></div>
+        </jw-modal>

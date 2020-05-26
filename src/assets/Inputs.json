@@ -1,0 +1,26 @@
+[
+    {
+         "type":"Input","code":"<mat-form-field><input matInput style=\"bakground-color:white\"></mat-form-field><br/>"
+    },
+    {
+        "type":"TextArea","code":"<mat-form-field><textarea matInput></textarea></mat-form-field><br/>"
+    },
+    {
+        "type":"CheckBox","code":"<mat-checkbox></mat-checkbox><br/>"
+    },
+    {
+        "type":"RadioButton","code":"<mat-radio-button>click</mat-radio-button>"
+    },
+    {
+        "type":"Selection","code":"<mat-form-field><mat-select ><mat-option>None</mat-option><mat-option></mat-option></mat-select></mat-form-field>"
+    },
+    {
+        "type":"MultipleSelection","code":"<mat-form-field><mat-select multiple><mat-option ></mat-option></mat-select></mat-form-field>"
+    },
+    {
+        "type":"Datepicker","code":"<mat-form-field><input matInput [matDatepicker]=\"picker\" placeholder=\"Choose a date\"><mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle><mat-datepicker #picker></mat-datepicker></mat-form-field><br/>"
+    },
+    {
+        "type":"Label","code":"<mat-label></mat-label><br/>"
+    }
+]

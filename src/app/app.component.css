@@ -1,0 +1,69 @@
+.mat-accordion{
+    height: 100%;
+    width: 100%;
+    background-color: powderblue;
+}
+.mat-expansion-panel{
+    height: 100%;
+    width: 100%;
+    background-color: powderblue;
+}
+.mat-expansion-panel-header{
+    font-size: 16px;
+    background-color: rgb(213, 221, 214);
+}
+.mat-list{
+    height: 100%;
+    width: 100%;
+}
+.mat-list-item{
+    margin: 30px 10px;  
+}
+
+  .mat-form-field{
+    margin: 25px 25px;
+      width:70%
+  }
+  mat-form-field.mat-form-field {
+    font-size: 16px;
+  }
+
+  .btn
+  {
+    position: relative;
+    padding: 12px 30px;
+    min-width: auto;
+    font-size: .90rem;
+    font-weight: 400;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+    letter-spacing: 0;
+    cursor: pointer;
+    background-color: powderblue;
+    border: 0;
+    outline: 0;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: box-shadow, transform;
+  }
+
+  .mat-divider{
+    display: inline-block;
+  }
+
+  .mat-slide-toggle{
+    margin: 5px 10px;
+  }
+  .section{
+    margin: 25px 25px;  
+  }
+
+  .vl {
+    border-left: 2px solid rgb(203, 218, 206);
+    height: 100px;
+}
+
+i {
+  cursor: pointer;
+}
+  
